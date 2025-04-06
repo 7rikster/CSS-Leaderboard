@@ -55,6 +55,8 @@ function Leaderboard({ title }: { title: string }) {
       return;
     }
     await createContestant(contestant, "/");
+    const updatedData = await getContestants();
+    setLeaderboardData(updatedData);
     setContestant({ name: "", score: 0, issuesFixed: [] });
     setIsOpen(false);
   }

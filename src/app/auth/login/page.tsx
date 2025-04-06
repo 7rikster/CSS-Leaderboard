@@ -9,13 +9,11 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from ".././../../components/ui/card";
 import { signIn, signInWithGoogle } from "../../../lib/firebase/auth";
 import { toast } from "sonner";
-import Link from "next/link";
 
 function LogIn() {
   const [email, setEmail] = useState("");
