@@ -2,7 +2,6 @@
 
 import { useUser } from "@/context/authContext";
 import { LogOut, User } from "lucide-react";
-import Image from "next/image";
 import { DropdownMenu } from "../ui/dropdown-menu";
 import {
   DropdownMenuContent,
@@ -11,6 +10,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { Button } from "../ui/button";
 import { signOut } from "@/lib/firebase/auth";
+import Link from "next/link";
 
 function Header() {
   const { user } = useUser();
@@ -20,7 +20,7 @@ function Header() {
       <div>
         <h1 className="font-bold text-3xl md:text-5xl">CSS Abacus 2025</h1>
       </div>
-      {user !== null && (
+      {user !== null ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <div className="flex items-center border-2 p-2 rounded-full border-gray-300 bg-white shadow-md cursor-pointer hover:bg-gray-100">
@@ -41,6 +41,10 @@ function Header() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      ) : (
+        <Link href="/auth/login">
+          <Button className="cursor-pointer">Sign in</Button>
+        </Link>
       )}
     </div>
   );

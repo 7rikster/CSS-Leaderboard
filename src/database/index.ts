@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-const dotenv = require("dotenv");
-dotenv.config();
 
 const connectToDB = async () => {
   const connectionUrl =
@@ -10,7 +8,7 @@ const connectToDB = async () => {
   mongoose
     .connect(connectionUrl)
     .then(() => console.log("MongoDB connected successfully"))
-    .catch((err: any) => console.log("MongoDB connection failed", err));
+    .catch((err) => console.log("MongoDB connection failed", err));
 };
 
 export default connectToDB;

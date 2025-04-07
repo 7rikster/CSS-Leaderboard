@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from ".././../../components/ui/card";
-import { signIn, signInWithGoogle } from "../../../lib/firebase/auth";
+import { signIn } from "../../../lib/firebase/auth";
 import { toast } from "sonner";
 
 function LogIn() {
@@ -63,24 +63,12 @@ function LogIn() {
     }
   }
 
-  function handleSignInWithGoogle(event: any) {
-    event.preventDefault();
-
-    signInWithGoogle().then((user) => {
-      if (user.uid) {
-        toast.success("User Signed in Successfully");
-        setTimeout(() => {
-          router.refresh();
-          router.push(typeof redirect === "string" ? redirect : "/");
-        }, 1000);
-      } else {
-        toast.error("User Signin Failed");
-      }
-    });
-  }
+  useEffect(() => {
+    toast("This login is for admins only");
+  }, []);
 
   return (
-    <main className="h-screen flex items-center justify-center bg-[url(/cover-photo.jpg)] bg-cover bg-center">
+    <main className="h-screen flex items-center justify-center ">
       <Card className="p-6 space-y-4">
         <CardHeader>
           <CardTitle className="text-2xl">Welcome Back!!</CardTitle>
@@ -109,21 +97,10 @@ function LogIn() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {/* <br /> */}
-          <div className="flex flex-col justify-between items-center space-y-2 mt-2">
-            <p className="text-center text-gray-600">Or Sign In using</p>
-            <button
-              className="rounded-full mb-2"
-              onClick={handleSignInWithGoogle}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png"
-                className="h-10"
-              />
-            </button>
-          </div>
+          <br />
+
           <Button
-            className="w-full bg-primary"
+            className="w-full bg-primary mt-4"
             onClick={handleSignIn}
             type="submit"
             disabled={logging}
