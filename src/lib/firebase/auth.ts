@@ -83,7 +83,7 @@ export async function signInWithGoogle() {
     } else {
       throw new Error("Current user is null");
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error signing in with Google", error);
     return error;
   }
