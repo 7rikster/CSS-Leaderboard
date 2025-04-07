@@ -62,7 +62,6 @@ function Leaderboard({ title }: { title: string }) {
   console.log(issueData);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isIssueOpen, setIsIssueOpen] = useState(false);
   const [contestant, setContestant] = useState<ContestantData>({
     name: "",
     score: 0,
@@ -120,11 +119,11 @@ function Leaderboard({ title }: { title: string }) {
     }
     if (id !== "") {
       const response = await updateContestant(updatedContestant, id);
+      console.log(response);
       const updatedData = await getContestants();
       setLeaderboardData(updatedData);
     }
     setIssueData({ title: "", level: "Level", url: "", date: new Date() });
-    setIsIssueOpen(false);
   }
 
   useEffect(() => {

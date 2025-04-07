@@ -37,7 +37,7 @@ export async function createUser(
     }
   } catch (err) {
     console.log("Error registering user");
-    throw new Error("Current user is null");
+    throw new Error("Current user is null", err);
   }
 }
 
@@ -50,7 +50,7 @@ export async function signIn(email: string, password: string) {
     } else {
       throw new Error("Current user is null");
     }
-  } catch (e: any) {
+  } catch (e) {
     console.log(e);
     const errorCode = e.code;
 
