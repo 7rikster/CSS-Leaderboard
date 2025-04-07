@@ -24,7 +24,7 @@ function LogIn() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
 
-  function handleSignIn(event: any) {
+  function handleSignIn(event: React.FormEvent) {
     event.preventDefault();
     setLogging(true);
 
