@@ -22,9 +22,15 @@ export async function createContestant(
   formData: ContestantData,
   pathToRevalidate: string
 ) {
+  console.time("createContestant");
   await connectToDB();
+
+  console.time("dbWrite");
   await OpenSourceModel.create(formData);
+  console.timeEnd("dbWrite");
+
   revalidatePath(pathToRevalidate);
+  console.timeEnd("createContestant");
 }
 
 export async function getContestants() {
