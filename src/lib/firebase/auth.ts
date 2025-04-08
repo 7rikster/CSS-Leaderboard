@@ -1,6 +1,4 @@
 import {
-  GoogleAuthProvider,
-  signInWithPopup,
   onAuthStateChanged as _onAuthStateChanged,
   NextOrObserver,
   User,
@@ -67,27 +65,6 @@ export async function signIn(email: string, password: string) {
   }
 }
 
-export async function signInWithGoogle() {
-  const provider = new GoogleAuthProvider();
-  let user: any;
-  try {
-    await signInWithPopup(auth, provider).then((userCred) => {
-      user = userCred.user;
-    });
-    if (user) {
-      await updateProfile(user, {
-        displayName: `${user.displayName}`,
-        photoURL: `${user.photoURL}`,
-      });
-      return user;
-    } else {
-      throw new Error("Current user is null");
-    }
-  } catch (error) {
-    console.error("Error signing in with Google", error);
-    return error;
-  }
-}
 
 export async function signOut() {
   try {
