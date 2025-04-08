@@ -34,8 +34,8 @@ export async function createUser(
       throw new Error("Current user is null");
     }
   } catch (err) {
-    console.log("Error registering user");
-    throw new Error("Current user is null", err);
+    console.error("Error registering user:", err);
+    throw new Error("Current user is null");
   }
 }
 
@@ -50,7 +50,7 @@ export async function signIn(email: string, password: string) {
     }
   } catch (e) {
     console.log(e);
-    const errorCode = e.code;
+    const errorCode = (e as { code: string }).code;
 
     console.log(errorCode);
     if (errorCode === "auth/invalid-credential") {
