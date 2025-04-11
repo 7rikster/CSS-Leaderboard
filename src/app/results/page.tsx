@@ -35,7 +35,6 @@ function Results() {
   const [isTimeUp, setIsTimeUp] = useState(false);
   const [loading, setLoading] = useState(true);
   const [timeLoading, setTimeLoading] = useState(true);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [leaderboardData, setLeaderboardData] = useState<ContestantData[] | []>(
     []
   );
@@ -53,7 +52,6 @@ function Results() {
   useEffect(() => {
     if (timeLeft <= 0) {
       setIsTimeUp(true);
-      setIsDialogOpen(true);
       setTimeLoading(false);
       return;
     }
