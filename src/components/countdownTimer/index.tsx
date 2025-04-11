@@ -1,19 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 function CountdownTimer() {
   const targetDate = new Date("2025-04-11T23:59:59"); // EOD 12 April 2025
 
   const [timeLeft, setTimeLeft] = useState(targetDate.getTime() - Date.now());
   const [isTimeUp, setIsTimeUp] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (timeLeft <= 0) {
       setIsTimeUp(true);
+      setIsDialogOpen(true);
+      setLoading(false);
       return;
     }
-
+    setLoading(false);
     const interval = setInterval(() => {
       const diff = targetDate.getTime() - Date.now();
       if (diff <= 0) {
@@ -39,20 +52,39 @@ function CountdownTimer() {
 
   return (
     <>
-      {!isTimeUp ? (
-        <div className="text-4xl font-semibold mb-4">
+      {!isTimeUp && !loading ? (
+        <div className="text-2xl md:text-4xl font-semibold mb-4">
           Time left: {formatTime(timeLeft)}
         </div>
       ) : (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-xl text-center shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">🎉 Contest has ended!</h2>
-            <button
-              onClick={() => (window.location.href = "/results")}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
-            >
-              View Results
-            </button>
+        <div>
+          {loading ? (
+            <div className="text-4xl font-semibold mb-4">Loading...</div>
+          ) : (
+            <div className="text-4xl font-semibold mb-4">
+              The marathon has ended! 🎉
+            </div>
+          )}
+
+          <div className="fixed inset-0 bg-opacity-60 flex items-center justify-center z-50">
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogContent className="sm:max-w-[425px] sm:max-h-[500px]">
+                <DialogHeader>
+                  <DialogTitle className="text-center">
+                    The marathon has ended! 🎉
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="text-lg text-center mt-4">
+                  Thank you for participating! We hope you enjoyed the marathon.
+                </div>
+
+                <DialogFooter>
+                  <Link href={"/results"}>
+                    <Button className="cursor-pointer">View results</Button>
+                  </Link>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       )}

@@ -59,8 +59,6 @@ function Leaderboard({ title }: { title: string }) {
     date: new Date(),
   });
 
-  console.log(issueData);
-
   const [isOpen, setIsOpen] = useState(false);
   const [contestant, setContestant] = useState<ContestantData>({
     name: "",
@@ -119,7 +117,6 @@ function Leaderboard({ title }: { title: string }) {
     }
     if (id !== "") {
       const response = await updateContestant(updatedContestant, id);
-      console.log(response);
       const updatedData = await getContestants();
       setLeaderboardData(updatedData);
     }
@@ -130,7 +127,6 @@ function Leaderboard({ title }: { title: string }) {
     async function fetchLeaderboardData() {
       const response = await getContestants();
       if (response !== null) setLeaderboardData(response);
-      console.log(response);
       setLoading(false);
     }
 
