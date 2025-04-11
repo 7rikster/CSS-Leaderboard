@@ -117,6 +117,7 @@ function Leaderboard({ title }: { title: string }) {
     }
     if (id !== "") {
       const response = await updateContestant(updatedContestant, id);
+      console.log(response);
       const updatedData = await getContestants();
       setLeaderboardData(updatedData);
     }
@@ -126,6 +127,7 @@ function Leaderboard({ title }: { title: string }) {
   useEffect(() => {
     async function fetchLeaderboardData() {
       const response = await getContestants();
+      console.log(response);
       if (response !== null) setLeaderboardData(response);
       setLoading(false);
     }
