@@ -66,26 +66,24 @@ function CountdownTimer() {
             </div>
           )}
 
-          <div className="fixed inset-0 bg-opacity-60 flex items-center justify-center z-50">
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogContent className="sm:max-w-[425px] sm:max-h-[500px]">
-                <DialogHeader>
-                  <DialogTitle className="text-center">
-                    The marathon has ended! 🎉
-                  </DialogTitle>
-                </DialogHeader>
-                <div className="text-lg text-center mt-4">
-                  Thank you for participating! We hope you enjoyed the marathon.
-                </div>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogContent className="sm:max-w-[425px] sm:max-h-[500px]">
+              <DialogHeader>
+                <DialogTitle className="text-center">
+                  The marathon has ended! 🎉
+                </DialogTitle>
+              </DialogHeader>
+              <div className="text-lg text-center mt-4">
+                Thank you for participating! We hope you enjoyed the marathon.
+              </div>
 
-                <DialogFooter>
-                  <Link href={"/results"}>
-                    <Button className="cursor-pointer">View results</Button>
-                  </Link>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
+              <DialogFooter>
+                <Link href={"/results"}>
+                  <Button className="cursor-pointer">View results</Button>
+                </Link>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       )}
     </>
