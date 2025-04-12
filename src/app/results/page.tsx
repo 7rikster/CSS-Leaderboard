@@ -164,7 +164,7 @@ function Results() {
                                   )
                                 }
                               >
-                                <div className="flex items-center justify-start w-full">
+                                <div className="flex items-center justify-start max-w-[300px] w-full">
                                   <span
                                     className={`w-6 text-center font-semibold`}
                                   >
